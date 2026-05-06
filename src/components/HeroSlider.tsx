@@ -41,6 +41,24 @@ export default function HeroSlider() {
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
+  const splitText = (text: string) => {
+    let charCount = 0;
+    return text.split(' ').map((word, wordIdx) => (
+      <span key={wordIdx} style={{ whiteSpace: 'nowrap', display: 'inline-block' }}>
+        {word.split('').map((char, charIdx) => {
+          const delay = 0.2 + charCount++ * 0.03;
+          return (
+            <span key={charIdx} className="hero-char" style={{ animationDelay: `${delay}s` }}>
+              {char}
+            </span>
+          );
+        })}
+        {/* Space between words */}
+        {'\u00A0'}
+      </span>
+    ));
+  };
+
   return (
     <section className="hero-slider">
       {slides.map((slide, index) => (
@@ -52,7 +70,9 @@ export default function HeroSlider() {
           <div className="slide-overlay"></div>
           <div className="slide-content-container">
             <div className="hero-text-box">
-              <h1 className="hero-title heading-dot">{slide.title}</h1>
+              <h1 className="hero-title heading-dot">
+                {splitText(slide.title)}
+              </h1>
               <p className="hero-desc">{slide.desc}</p>
               <div className="hero-buttons">
                 <a href={slide.link} className="btn-hero">{slide.linkText}</a>
@@ -62,7 +82,7 @@ export default function HeroSlider() {
           </div>
         </div>
       ))}
-      
+
       <button className="slider-arrow left" onClick={prevSlide} aria-label="Previous slide">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>

@@ -15,10 +15,16 @@ export default function Header() {
         <div className="logo-container">
           <Link href="/">
             <img 
+              src="/logo/bosq white logo.png" 
+              alt="BOSQ ergonomic living" 
+              className="logo-img logo-default"
+              style={{ height: '40px', width: 'auto' }}
+            />
+            <img 
               src="/logo/BOSQ LOGO-02 (4).png" 
               alt="BOSQ ergonomic living" 
-              className="logo-img"
-              style={{ height: '50px', width: 'auto', display: 'block' }}
+              className="logo-img logo-hover"
+              style={{ height: '50px', width: 'auto' }}
             />
           </Link>
         </div>
